@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "640414700102",
+    "firebase_url": "https://library-management-9d3ec-default-rtdb.firebaseio.com",
+    "project_id": "library-management-9d3ec",
+    "storage_bucket": "library-management-9d3ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640414700102:android:72852b4b72a3c10d1d3047",
+        "android_client_info": {
+          "package_name": "com.example.library_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640414700102-et6uaqglla6a50fbvb1htltkck8qo8a5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN8kFvIiCpnb-5TqnILqBQ7smdswjWjb8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640414700102-et6uaqglla6a50fbvb1htltkck8qo8a5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
