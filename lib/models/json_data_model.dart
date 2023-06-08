@@ -24,11 +24,13 @@ class DataModel {
 
 class Books {
   final int bookID;
+  final String bookImage;
   final String bookName;
   final String bookAuthor;
   final bool available;
   Books({
     required this.bookID,
+    required this.bookImage,
     required this.bookName,
     required this.bookAuthor,
     required this.available,
@@ -36,6 +38,7 @@ class Books {
 
   factory Books.fromJSon(Map<String, dynamic> json) => Books(
       bookID: json["bookID"],
+      bookImage: json["bookImage"],
       bookName: json["bookName"],
       bookAuthor: json['bookAuthor'],
       available: json["available"]);

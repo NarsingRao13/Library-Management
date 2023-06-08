@@ -21,9 +21,7 @@ class HeadProductState extends State<HeadProduct> {
   Widget build(BuildContext context) {
     DataProvider dataProvider =
         Provider.of<DataProvider>(context, listen: true);
-    final iterableProvider = Provider.of<IterableData>(context, listen: true);
-    print("==== ${dataProvider.mappedData}");
-    print("setData=${iterableProvider.iterableData}");
+    final iterableProvider = Provider.of<IterableData>(context, listen: false);
     return Container(
       height: 160,
       child: ListView.builder(
