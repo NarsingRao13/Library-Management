@@ -1,0 +1,93 @@
+[
+  {
+    "cna": "Fiction",
+    "cId": 1,
+    "cImage": "https://img.freepik.com/free-photo/turn-page-collage_23-2149876316.jpg?w=740&t=st=1686121435~exp=1686122035~hmac=c961a6d0d5b65686ddbaa5371c1a274e1306e8898793abaabafec56de98d68eb",
+    "books": [
+      {
+        "bookID": 1,
+        "bookName": "Fahrenheit 451",
+        "bookAuthor": "By Ray Bradbury",
+        "available": true
+      }
+    ]
+  },
+  {
+    "cna": "Stories",
+    "cId": 2,
+    "cImage": "https://cdn.vectorstock.com/i/1000x1000/28/84/story-book-logo-design-template-vector-35162884.webp",
+    "books": [
+      {
+        "bookID": 1,
+        "bookName": "Famous Five",
+        "bookAuthor": "Enid Blyton",
+        "available": true
+      }
+    ]
+  },
+  {
+    "cna": "Novel",
+    "cId": 3,
+    "cImage": "https://static.vecteezy.com/system/resources/thumbnails/006/800/199/small/creative-abstract-book-feather-logo-design-vector.jpg",
+    "books": [
+      {
+        "bookID": 1,
+        "bookName": "The India Story",
+        "bookAuthor": "Bimal Jalal",
+        "available": true
+      }
+    ]
+  },
+  {
+    "cna": "Self-Help Books",
+    "cId": 4,
+    "cImage": "https://images-platform.99static.com//TW0JTjwe6zcIRjSC3bQ95ugMk7M=/210x18:1137x945/fit-in/590x590/99designs-contests-attachments/90/90795/attachment_90795280",
+    "books": [
+      {
+        "bookID": 1,
+        "bookName": "",
+        "bookAuthor": "",
+        "available": true
+      }
+    ]
+  },
+  {
+    "cna": "Children’s Books",
+    "cId": 5,
+    "cImage": "https://t3.ftcdn.net/jpg/04/73/77/16/240_F_473771643_sMsH4HvVzxizZYftnIwz9LEd0Wiel7CX.jpg",
+    "books": [
+      {
+        "bookID": 1,
+        "bookName": "",
+        "bookAuthor": "",
+        "available": true
+      }
+    ]
+  },
+  {
+    "cna": "Biography",
+    "cId": 6,
+    "cImage": "https://t4.ftcdn.net/jpg/02/85/63/55/240_F_285635587_wgqBJvnWPH7zcS7Asaiwg7kV3vxarmPd.jpg",
+    "books": [
+      {
+        "bookID": 1,
+        "bookName": "The Alchemist by Paulo Coelho",
+        "bookAuthor": "Paulo Coelho",
+        "available": true
+      }
+    ]
+  },
+  {
+    "cna": "Political Books",
+    "cId": 7,
+    "cImage": "https://t3.ftcdn.net/jpg/06/04/45/36/360_F_604453681_PkImpnrPVYbaxjExMD8sQxaWmFJ5Sfyu.jpg",
+    "books": [
+      {
+        "bookID": 1,
+        "bookName": "The Fifth Risk",
+        "bookAuthor": "Michael Lewis",
+        "available": true
+      }
+    ]
+  }
+]
