@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:library_management/providers/library_provider.dart';
+import 'package:library_management/ui/components/category_button.dart';
 import 'package:provider/provider.dart';
 
 class Categories extends StatefulWidget {
@@ -23,11 +24,24 @@ class _CategoriesState extends State<Categories> {
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          cats.isEmpty
-              ? const SizedBox()
-              : Row(children: cats.map((e) => Text(e.name ?? "Hey")).toList())
+          if (cats.isEmpty)
+            const SizedBox()
+          else
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: cats
+                      .map(
+                        (e) => CategoryButton(buttonData: e),
+                      )
+                      .toList(),
+                ),
+              ),
+            )
         ],
       ),
     );

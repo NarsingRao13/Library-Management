@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:library_management/providers/library_provider.dart';
+import 'package:library_management/ui/components/book.dart';
 import 'package:library_management/ui/screens/categories.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: const Categories(),
+      body: const Column(children: [Categories(), Book()]),
     );
   }
 }

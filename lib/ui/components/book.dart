@@ -19,12 +19,9 @@ class _Book extends State<Book> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-          child: ElevatedButton(
-        onPressed: _openAddBook,
-        child: const Text('Books'),
-      )),
+    return ElevatedButton(
+      onPressed: _openAddBook,
+      child: const Text('Books'),
     );
   }
 }
