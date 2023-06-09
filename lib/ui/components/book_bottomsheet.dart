@@ -73,43 +73,27 @@ class BookBottomSheetState extends State<BookBottomSheet> {
       padding: const EdgeInsets.fromLTRB(10, 40, 10, 10),
       child: Column(
         children: [
+          TextField(
+            controller: _textFieldController2,
+            maxLength: 50,
+            keyboardType: TextInputType.text,
+            decoration: const InputDecoration(
+              labelText: 'Book',
+            ),
+          ),
           Row(
             children: [
-              Expanded(
-                child: TextField(
-                  controller: _textFieldController2,
-                  maxLength: 50,
-                  keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                    labelText: 'Book',
-                  ),
-                ),
+              Text(_selectedDate == null
+                  ? 'No date selected'
+                  : formatter.format(_selectedDate!)),
+              IconButton(
+                onPressed: _presentDatePicker,
+                icon: const Icon(Icons.calendar_month),
               ),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(_selectedDate == null
-                      ? 'No date selected'
-                      : formatter.format(_selectedDate!)),
-                  IconButton(
-                    onPressed: _presentDatePicker,
-                    icon: const Icon(Icons.calendar_month),
-                  ),
-                ],
-              )),
             ],
-          ),
-          const SizedBox(
-            height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextButton(
                   onPressed: () {
@@ -120,6 +104,11 @@ class BookBottomSheetState extends State<BookBottomSheet> {
                 onPressed: _saveBookData,
                 child: const Text('Save'),
               ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Next...')),
             ],
           )
         ],
