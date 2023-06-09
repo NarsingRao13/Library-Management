@@ -9,6 +9,7 @@ class LibraryProvider extends ChangeNotifier {
   List<CategoryData> categories = [];
   List<BookData> books = [];
   String selectedCatName = "";
+  String? selectedDropdownValue;
 
   CollectionReference categoriesCollection =
       FirebaseFirestore.instance.collection("categories");

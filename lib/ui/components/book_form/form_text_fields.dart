@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './form_dropdown_items.dart';
-
-void main() {
-  runApp(const MyCustomForm());
-}
+import 'package:library_management/providers/library_provider.dart';
 
 class MyCustomForm extends StatefulWidget {
   const MyCustomForm({super.key});
@@ -19,6 +17,22 @@ class MyCustomFormState extends State<MyCustomForm> {
   final _descriptionController = TextEditingController();
   final _authorController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  Future<void> _bookRegistration(BuildContext context) async {
+    String bookName = _nameController.text;
+    String bookDescription = _descriptionController.text;
+    String authorName = _authorController.text;
+    final String dropValue =
+        context.read<LibraryProvider>().selectedDropdownValue ?? "";
+    context.watch<LibraryProvider>().addBook(
+          author: authorName,
+          availability: true,
+          genre: dropValue,
+          image:
+              "http://img.freepik.com/free-vector/flat-world-book-day-background_23-2148094555.jpg?size=626&ext=jpg&ga=GA1.1.985226980.1677144010&semt=ais",
+          title: bookName,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,21 +119,35 @@ class MyCustomFormState extends State<MyCustomForm> {
               },
             ),
             const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: MyHomePage(),
+            const Padding(
+              padding: EdgeInsets.all(0),
+              child: FormDropdown(),
             ),
             const SizedBox(height: 30),
             ElevatedButton(
               style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(Colors.cyan.shade900),
-                padding: MaterialStateProperty.all(const EdgeInsets.all(18)),
+                backgroundColor: MaterialStateProperty.all(
+                  const Color.fromARGB(255, 4, 28, 50),
+                ),
+                padding: MaterialStateProperty.all(
+                  const EdgeInsets.symmetric(
+                    horizontal: 50,
+                    vertical: 20,
+                  ),
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                ),
                 textStyle:
                     MaterialStateProperty.all(const TextStyle(fontSize: 26)),
               ),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
+                  _bookRegistration;
                   _nameController.clear();
                   _authorController.clear();
                   _descriptionController.clear();
@@ -131,7 +159,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                   );
                 }
               },
-              child: const Text('Submit'),
+              child:
+                  const Text('Submit', style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
