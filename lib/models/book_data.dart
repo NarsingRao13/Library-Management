@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class BookData {
   final String id;
@@ -27,28 +28,33 @@ class Book {
   final String author;
   final String title;
   final String genre;
-  final bool availability;
+  final bool? availability;
   final String image;
   final double? rating;
+  final DateFormat? bookedDate;
+  final DateFormat? returnDate;
 
   Book({
     required this.author,
     required this.title,
     required this.genre,
-    required this.availability,
+    this.availability,
     required this.image,
     this.rating,
+    this.bookedDate,
+    this.returnDate,
   });
 
   factory Book.fromJson(Map<String, dynamic> json) {
     return Book(
-      author: json['author'],
-      title: json['title'],
-      genre: json['genre'],
-      availability: json['availability'],
-      image: json['image'],
-      rating: json['rating'],
-    );
+        author: json['author'],
+        title: json['title'],
+        genre: json['genre'],
+        availability: json['availability'] ?? true,
+        image: json['image'],
+        rating: json['rating'],
+        bookedDate: json['bookedDate'],
+        returnDate: json['returnDate']);
   }
 
   // Map<String, dynamic> toJson() {
