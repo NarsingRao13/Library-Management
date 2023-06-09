@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:library_management/models/book_data.dart';
 import 'package:library_management/models/category_data.dart';
 
@@ -26,7 +27,34 @@ class LibraryProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addBook() {}
+  void addBook(
+      {required String title,
+      required String author,
+      required String image,
+      required String genre,
+      required bool availability}) async {
+    final newBook = <String, dynamic>{
+      "title": title,
+      "author": author,
+      "availability": availability,
+      "genre": genre,
+      "image": image
+    };
+
+    await booksCollection.add(newBook).then(
+          (DocumentReference doc) =>
+              print('DocumentSnapshot added with ID: ${doc.id}'),
+          // fetchBookWithId( id: doc.id.toString());
+        );
+  }
+
+  // void fetchBookWithId({required String id}) async {
+  //   await booksCollection.doc(id).get().then((document) {
+  //     print(
+  //       document("name"),
+  //     );
+  //   });
+  // }
 
   void fetchBooks() async {
     await booksCollection.get().then((QuerySnapshot querySnapshot) {

@@ -16,10 +16,20 @@ class _BooksState extends State<Books> {
     super.initState();
   }
 
+  void _addNewBook() {
+    context.read<LibraryProvider>().addBook(
+        title: "The Girl in Room 105",
+        author: "Chetan Bhagat",
+        image:
+            "https://upload.wikimedia.org/wikipedia/en/b/b9/Girl_in_room_105.png",
+        genre: "Mystery, Thriller",
+        availability: true);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [Text("hey")],
+    return Column(
+      children: [ElevatedButton(onPressed: _addNewBook, child: Text("hey"))],
     );
   }
 }
