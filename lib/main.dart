@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:library_management/providers/iterable_data_provider.dart';
+import 'package:library_management/providers/json_data_provider.dart';
 import 'package:library_management/providers/library_provider.dart';
-import 'package:library_management/ui/components/book.dart';
-import 'package:library_management/ui/screens/books.dart';
-import 'package:library_management/ui/screens/categories.dart';
+import 'package:library_management/ui/screens/my_home_page.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +17,12 @@ void main() async {
       providers: [
         ChangeNotifierProvider<LibraryProvider>(
           create: (_) => LibraryProvider(),
+        ),
+        ChangeNotifierProvider<DataProvider>(
+          create: (_) => DataProvider(),
+        ),
+        ChangeNotifierProvider<IterableData>(
+          create: (_) => IterableData(),
         ),
       ],
       child: const MyApp(),
@@ -36,35 +42,38 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Library Management'),
+      home: const MyHomePage(),
+      routes: {
+        "Home": (ctx) => const MyHomePage(),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+// class MyHomePage extends StatefulWidget {
+//   const MyHomePage({super.key, required this.title});
+//   final String title;
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+//   @override
+//   State<MyHomePage> createState() => _MyHomePageState();
+// }
 
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: const Column(children: [
-        //List of categories/genre
-        Categories(),
-        //Books List
-        Books(),
-        //Button for booking a book
-        Book(),
-      ]),
-    );
-  }
-}
+// class _MyHomePageState extends State<MyHomePage> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+//         title: Text(widget.title),
+//       ),
+//       body: const Column(children: [
+//         //List of categories/genre
+//         Categories(),
+//         //Books List
+//         Books(),
+//         //Button for booking a book
+//         Book(),
+//       ]),
+//     );
+//   }
+// }

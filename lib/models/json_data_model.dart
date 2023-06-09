@@ -14,9 +14,9 @@ class DataModel {
   factory DataModel.fromJson(Map<String, dynamic> json) {
     final bookss = json['books'] as List;
     return DataModel(
-      cna: json["cna"],
-      cId: json["cId"],
-      cImage: json["cImage"],
+      cna: json["cna"] ?? "",
+      cId: json["cId"] ?? "",
+      cImage: json["cImage"] ?? "",
       books: bookss?.map((e) => Books.fromJSon(e)).toList() ?? [],
     );
   }
@@ -37,9 +37,10 @@ class Books {
   });
 
   factory Books.fromJSon(Map<String, dynamic> json) => Books(
-      bookID: json["bookID"],
-      bookImage: json["bookImage"],
-      bookName: json["bookName"],
-      bookAuthor: json['bookAuthor'],
-      available: json["available"]);
+        bookID: json["bookID"] ?? "",
+        bookImage: json["bookImage"] ?? "",
+        bookName: json["bookName"] ?? "",
+        bookAuthor: json['bookAuthor'] ?? "",
+        available: json["available"] ?? "",
+      );
 }

@@ -6,10 +6,10 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage":"https://img.freepik.com/free-vector/flat-world-book-day-background_23-2148094555.jpg?size=626&ext=jpg&ga=GA1.1.985226980.1677144010&semt=ais",
+        "bookImage": "http://img.freepik.com/free-vector/flat-world-book-day-background_23-2148094555.jpg?size=626&ext=jpg&ga=GA1.1.985226980.1677144010&semt=ais",
         "bookName": "Fahrenheit 451",
-        "bookAuthor": "By Ray Bradbury",
-        "available": false
+        "bookAuthor": "By Ray",
+        "available": true
       }
     ]
   },
@@ -20,7 +20,7 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage":"",
+        "bookImage": "",
         "bookName": "Famous Five",
         "bookAuthor": "Enid Blyton",
         "available": true
@@ -34,7 +34,7 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage":"",
+        "bookImage": "",
         "bookName": "The India Story",
         "bookAuthor": "Bimal Jalal",
         "available": true
@@ -48,9 +48,9 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage":"",
+        "bookImage": "",
         "bookName": "",
-        
+
         "bookAuthor": "",
         "available": true
       }
@@ -63,7 +63,7 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage":"",
+        "bookImage": "",
         "bookName": "",
         "bookAuthor": "",
         "available": true
@@ -77,7 +77,7 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage":"",
+        "bookImage": "",
         "bookName": "The Alchemist by Paulo Coelho",
         "bookAuthor": "Paulo Coelho",
         "available": true
@@ -91,7 +91,7 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage":"",
+        "bookImage": "",
         "bookName": "The Fifth Risk",
         "bookAuthor": "Michael Lewis",
         "available": true
