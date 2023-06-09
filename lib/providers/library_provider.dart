@@ -19,11 +19,12 @@ class LibraryProvider extends ChangeNotifier {
     categories = [];
     await categoriesCollection.get().then(
       (QuerySnapshot querySnapshot) {
-        for (var doc in querySnapshot.docs) {
-          CategoryData category =
-              CategoryData(name: doc['name'], id: doc["id"]);
-          categories.add(category);
-        }
+        final catData = querySnapshot.docs;
+        final data = catData
+            .map((e) =>
+                CategoryData(name: e['name'], id: e["id"], image: e['image']))
+            .toList();
+        categories = data;
       },
     );
     notifyListeners();
@@ -83,18 +84,21 @@ class LibraryProvider extends ChangeNotifier {
   void fetchBooks() async {
     books = [];
     await booksCollection.get().then((QuerySnapshot querySnapshot) {
-      for (var doc in querySnapshot.docs) {
-        BookData book = BookData(
-          id: doc.id,
-          book: Book(
-              author: doc['author'],
-              availability: doc['availability'],
-              genre: doc['genre'],
-              image: doc['image'],
-              title: doc['title']),
-        );
-        books.add(book);
-      }
+      final booksData = querySnapshot.docs;
+      booksData
+          .map(
+            (e) => BookData(
+              id: e.id,
+              book: Book(
+                author: e['author'],
+                availability: e['availability'],
+                genre: e['genre'],
+                image: e['image'],
+                title: e['title'],
+              ),
+            ),
+          )
+          .toList();
     });
     notifyListeners();
   }

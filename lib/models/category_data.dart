@@ -1,18 +1,22 @@
 class CategoryData {
-  String? name;
-  int? id;
+  final String name;
+  final int id;
+  final String image;
 
-  CategoryData({this.name, this.id});
+  CategoryData({required this.name, required this.id, required this.image});
 
-  CategoryData.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    id = json['id'];
+  factory CategoryData.fromJson(Map<String, dynamic> json) {
+    return CategoryData(
+      name: json['name'],
+      id: json['id'],
+      image: json['image'] ?? "",
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['id'] = this.id;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['name'] = this.name;
+  //   data['id'] = this.id;
+  //   return data;
+  // }
 }
