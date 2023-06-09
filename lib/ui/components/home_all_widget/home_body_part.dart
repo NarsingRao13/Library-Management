@@ -17,11 +17,11 @@ class HomeBody extends StatelessWidget {
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 0.85,
+            childAspectRatio: 0.90,
           ),
           itemBuilder: (context, index) {
             return Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: CardWidget(
                 image: booksData[index].book.image,
                 name: booksData[index].book.title,

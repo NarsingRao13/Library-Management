@@ -38,9 +38,16 @@ class _BookCard extends State<BookCard> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          color: Colors.white,
         ),
-        title: const Text("History"),
+        backgroundColor: Colors.blue,
+        title: const Text(
+          "History",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: ListView.builder(
           itemCount: books.length,
