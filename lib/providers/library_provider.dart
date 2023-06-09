@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,21 +8,27 @@ import 'package:library_management/models/category_data.dart';
 class LibraryProvider extends ChangeNotifier {
   List<CategoryData> categories = [];
   List<BookData> books = [];
+  String selectedCatName = "";
 
   CollectionReference categoriesCollection =
       FirebaseFirestore.instance.collection("categories");
   CollectionReference booksCollection =
       FirebaseFirestore.instance.collection("books");
 
+  void updateSelectedCatName(String name) {
+    selectedCatName = name;
+    // final booksValue = books.where((item) => item.book.title == name).toList();
+    // books = booksValue;
+    notifyListeners();
+  }
+
   void getDocs() async {
     categories = [];
     await categoriesCollection.get().then(
       (QuerySnapshot querySnapshot) {
         final catData = querySnapshot.docs;
-        final data = catData
-            .map((e) =>
-                CategoryData(name: e['name'], id: e["id"], image: e['image']))
-            .toList();
+        updateSelectedCatName(catData[0]['name']);
+        final data = catData.map((e) => CategoryData.fromJson(e)).toList();
         categories = data;
       },
     );
@@ -47,10 +52,7 @@ class LibraryProvider extends ChangeNotifier {
     await booksCollection
         .add(newBook)
         .then(
-          (DocumentReference doc) => {
-            print('DocumentSnapshot added with ID: ${doc.id}'),
-            fetchBookWithId(id: doc.id)
-          },
+          (DocumentReference doc) => {fetchBookWithId(id: doc.id)},
         )
         .onError(
           (error, stackTrace) => {
@@ -73,9 +75,6 @@ class LibraryProvider extends ChangeNotifier {
               title: document['title']),
         );
         books.add(book);
-        print(
-          'data  == ${document.data()}',
-        );
       },
     );
     notifyListeners();

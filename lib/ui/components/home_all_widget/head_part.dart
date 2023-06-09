@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:library_management/providers/iterable_data_provider.dart';
 import 'package:library_management/providers/json_data_provider.dart';
+import 'package:library_management/providers/library_provider.dart';
 import 'package:provider/provider.dart';
 
 class HeadProduct extends StatefulWidget {
@@ -15,12 +16,14 @@ class HeadProduct extends StatefulWidget {
 }
 
 class HeadProductState extends State<HeadProduct> {
-  int touchId = 0;
   @override
   Widget build(BuildContext context) {
     // DataProvider dataProvider =
     //     Provider.of<DataProvider>(context, listen: true);
-    final dataProvider = context.watch<DataProvider>();
+    final dataProvider = context.watch<LibraryProvider>();
+    final updateProvider = context.read<LibraryProvider>();
+
+    // final dataProvider = context.watch<DataProvider>();
     // final iterableProvider = Provider.of<IterableData>(context, listen: false);
     final iterableProvider = context.read<IterableData>();
 
@@ -35,17 +38,20 @@ class HeadProductState extends State<HeadProduct> {
               padding: const EdgeInsets.all(10),
               child: InkWell(
                 onTap: () {
-                  setState(() {
-                    touchId = index;
-                  });
-                  iterableProvider
-                      .setData(dataProvider.mappedData[index].books);
+                  updateProvider.updateSelectedCatName(
+                    dataProvider.categories[index].name,
+                  );
+
+                  // iterableProvider.setData(dataProvider.categories[index].id);
                 },
                 child: Container(
                   height: 190,
                   width: 70,
                   decoration: BoxDecoration(
-                    color: touchId == index ? Colors.deepPurple : Colors.white,
+                    color: dataProvider.selectedCatName ==
+                            dataProvider.categories[index].name
+                        ? Colors.deepPurple
+                        : Colors.white,
                     borderRadius: BorderRadius.circular(60),
                     boxShadow: const [
                       BoxShadow(
@@ -69,14 +75,18 @@ class HeadProductState extends State<HeadProduct> {
                         child: CircleAvatar(
                           radius: 48, // Image radius
                           backgroundImage: NetworkImage(
-                            dataProvider.mappedData[index].cImage.toString(),
+                            dataProvider.categories[index].image,
                           ),
                         ),
                       ),
                       Text(
-                        dataProvider.mappedData[index].cna,
+                        dataProvider.categories[index].name,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: touchId == index ? Colors.white : Colors.black,
+                          color: dataProvider.selectedCatName ==
+                                  dataProvider.categories[index].name
+                              ? Colors.white
+                              : Colors.black,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
@@ -88,7 +98,7 @@ class HeadProductState extends State<HeadProduct> {
             ),
           );
         },
-        itemCount: dataProvider.mappedData.length,
+        itemCount: dataProvider.categories.length,
       ),
     );
   }

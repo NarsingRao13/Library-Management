@@ -10,25 +10,28 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = context.watch<IterableData>();
 
-    return SizedBox(
-      height: 480,
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.8,
+    return Container(
+      // decoration: BoxDecoration(border: Border.all(width: 2)),
+      child: SizedBox(
+        height: 500,
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 0.85,
+          ),
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CardWidget(
+                image: data.iterableData[index].bookImage,
+                name: data.iterableData[index].bookName,
+                bookAuthor: data.iterableData[index].bookAuthor,
+                isAvailable: data.iterableData[index].available,
+              ),
+            );
+          },
+          itemCount: data.iterableData.length,
         ),
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CardWidget(
-              image: data.iterableData[index].bookImage,
-              name: data.iterableData[index].bookName,
-              bookAuthor: data.iterableData[index].bookAuthor,
-              isAvailable: data.iterableData[index].available,
-            ),
-          );
-        },
-        itemCount: data.iterableData.length,
       ),
     );
   }
