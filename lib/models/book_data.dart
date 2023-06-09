@@ -1,12 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class BookData {
-  String? id;
-  Book? book;
+  final String id;
+  final Book? book;
 
-  BookData({this.id, this.book});
+  BookData({required this.id, required this.book});
 
-  BookData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    book = json['book'] != null ? new Book.fromJson(json['book']) : null;
+  factory BookData.fromJson(QueryDocumentSnapshot<Object?> json) {
+    return BookData(
+      id: json['id'],
+      book: json['book'] != null ? Book.fromJson(json['book']) : null,
+    );
   }
 
   // Map<String, dynamic> toJson() {

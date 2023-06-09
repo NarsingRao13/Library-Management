@@ -1,11 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class CategoryData {
   final String name;
   final int id;
   final String image;
 
-  CategoryData({required this.name, required this.id, required this.image});
+  CategoryData({
+    required this.name,
+    required this.id,
+    required this.image,
+  });
 
-  factory CategoryData.fromJson(Map<String, dynamic> json) {
+  factory CategoryData.fromJson(QueryDocumentSnapshot<Object?> json) {
     return CategoryData(
       name: json['name'],
       id: json['id'],
