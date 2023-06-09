@@ -46,7 +46,10 @@ class CardWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(bookAuthor),
-                    ElevatedButton(onPressed: () {}, child: const Text("Book"))
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Book"),
+                    )
                   ],
                 ),
               ],
