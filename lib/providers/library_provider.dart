@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,17 +15,17 @@ class LibraryProvider extends ChangeNotifier {
   CollectionReference booksCollection =
       FirebaseFirestore.instance.collection("books");
 
-  void addCategory(CategoryData category) {
-    categories.add(category);
-  }
-
   void getDocs() async {
-    await categoriesCollection.get().then((QuerySnapshot querySnapshot) {
-      for (var doc in querySnapshot.docs) {
-        CategoryData c = CategoryData(name: doc['name'], id: doc["id"]);
-        addCategory(c);
-      }
-    });
+    categories = [];
+    await categoriesCollection.get().then(
+      (QuerySnapshot querySnapshot) {
+        for (var doc in querySnapshot.docs) {
+          CategoryData category =
+              CategoryData(name: doc['name'], id: doc["id"]);
+          categories.add(category);
+        }
+      },
+    );
     notifyListeners();
   }
 
@@ -41,22 +43,45 @@ class LibraryProvider extends ChangeNotifier {
       "image": image
     };
 
-    await booksCollection.add(newBook).then(
-          (DocumentReference doc) =>
-              print('DocumentSnapshot added with ID: ${doc.id}'),
-          // fetchBookWithId( id: doc.id.toString());
+    await booksCollection
+        .add(newBook)
+        .then(
+          (DocumentReference doc) => {
+            print('DocumentSnapshot added with ID: ${doc.id}'),
+            fetchBookWithId(id: doc.id)
+          },
+        )
+        .onError(
+          (error, stackTrace) => {
+            log("Failed to add new book"),
+            log('$error'),
+          },
         );
   }
 
-  // void fetchBookWithId({required String id}) async {
-  //   await booksCollection.doc(id).get().then((document) {
-  //     print(
-  //       document("name"),
-  //     );
-  //   });
-  // }
+  void fetchBookWithId({required String id}) async {
+    await booksCollection.doc(id).get().then(
+      (document) {
+        BookData book = BookData(
+          id: document.id,
+          book: Book(
+              author: document['author'],
+              availability: document['availability'],
+              genre: document['genre'],
+              image: document['image'],
+              title: document['title']),
+        );
+        books.add(book);
+        print(
+          'data  == ${document.data()}',
+        );
+      },
+    );
+    notifyListeners();
+  }
 
   void fetchBooks() async {
+    books = [];
     await booksCollection.get().then((QuerySnapshot querySnapshot) {
       for (var doc in querySnapshot.docs) {
         BookData book = BookData(
