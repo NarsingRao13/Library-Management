@@ -23,7 +23,7 @@
         "bookImage": "https://cdn.shopify.com/s/files/1/0591/8002/4002/files/71DzJMsHMUL_750x.jpg?v=1684959429",
         "bookName": "The Wall",
         "bookAuthor": "JEAN-PAUL",
-        "available": true
+        "available": false
       }
     ]
   },
@@ -69,9 +69,23 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage": "",
-        "bookName": "The India Story",
-        "bookAuthor": "Bimal Jalal",
+        "bookImage": "https://d3i5mgdwi2ze58.cloudfront.net/ohbd3xqukj7do2f0o5txmhghfsva",
+        "bookName": "Lost Time",
+        "bookAuthor": "Marcel Proust",
+        "available": true
+      },
+      {
+        "bookID": 2,
+        "bookImage": "https://d3i5mgdwi2ze58.cloudfront.net/zneklbeomp32h7fsp1isfkifhxrv",
+        "bookName": "Don Quixote",
+        "bookAuthor": "by Miguel",
+        "available": true
+      },
+      {
+        "bookID": 3,
+        "bookImage": "https://d3i5mgdwi2ze58.cloudfront.net/jzeie89rkkv1s2q7dwwgiysixnty",
+        "bookName": "Moby Dick",
+        "bookAuthor": "Marcel Proust",
         "available": true
       }
     ]
@@ -83,10 +97,10 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage": "",
-        "bookName": "",
+        "bookImage": "https://fourminutebooks.com/wp-content/uploads/2020/11/self-help-books-2.jpg.webp",
+        "bookName": "Atomic Habits",
 
-        "bookAuthor": "",
+        "bookAuthor": "James Clear",
         "available": true
       }
     ]
@@ -98,9 +112,9 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage": "",
-        "bookName": "",
-        "bookAuthor": "",
+        "bookImage": "https://m.media-amazon.com/images/I/51IQSodPUeL._SX398_BO1,204,203,200_.jpg",
+        "bookName": "HappyBirthday,Dragon!",
+        "bookAuthor": "steve",
         "available": true
       }
     ]
@@ -112,9 +126,9 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage": "",
-        "bookName": "The Alchemist by Paulo Coelho",
-        "bookAuthor": "Paulo Coelho",
+        "bookImage": "https://m.media-amazon.com/images/I/514BVljl9wL.jpg",
+        "bookName": "Alexander",
+        "bookAuthor": "Ron Chernow",
         "available": true
       }
     ]
@@ -126,7 +140,7 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage": "",
+        "bookImage": "https://m.media-amazon.com/images/I/41SyPHoWCtL._SL500_.jpg",
         "bookName": "The Fifth Risk",
         "bookAuthor": "Michael Lewis",
         "available": true
