@@ -7,5 +7,6 @@ class IterableData with ChangeNotifier {
   List<Books> iterableData = [];
   Future<void> setData(data) async {
     iterableData = data;
+    notifyListeners();
   }
 }

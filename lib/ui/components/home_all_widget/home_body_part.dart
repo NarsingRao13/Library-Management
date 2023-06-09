@@ -8,7 +8,7 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    IterableData data = context.read<IterableData>();
+    final data = context.watch<IterableData>();
 
     return SizedBox(
       height: 480,
