@@ -18,41 +18,47 @@ class HeadProductState extends State<HeadProduct> {
   int touchId = 0;
   @override
   Widget build(BuildContext context) {
-    DataProvider dataProvider =
-        Provider.of<DataProvider>(context, listen: true);
-    final iterableProvider = Provider.of<IterableData>(context, listen: false);
+    // DataProvider dataProvider =
+    //     Provider.of<DataProvider>(context, listen: true);
+    final dataProvider = context.watch<DataProvider>();
+    // final iterableProvider = Provider.of<IterableData>(context, listen: false);
+    final iterableProvider = context.read<IterableData>();
+
     return SizedBox(
-      height: 160,
+      height: 140,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(20),
-            child: InkWell(
-              onTap: () {
-                setState(() {
-                  touchId = index;
-                });
-                iterableProvider.setData(dataProvider.mappedData[index].books);
-              },
-              child: Container(
-                height: 190,
-                width: 80,
-                decoration: BoxDecoration(
-                  color: touchId == index ? Colors.deepPurple : Colors.white,
-                  borderRadius: BorderRadius.circular(60),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0.0, 1.0), //(x,y)
-                      blurRadius: 6.0,
-                    )
-                  ],
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
+          return Container(
+            // padding: const EdgeInsets.all(20),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    touchId = index;
+                  });
+                  iterableProvider
+                      .setData(dataProvider.mappedData[index].books);
+                },
+                child: Container(
+                  height: 190,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    color: touchId == index ? Colors.deepPurple : Colors.white,
+                    borderRadius: BorderRadius.circular(60),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0.0, 1.0), //(x,y)
+                        blurRadius: 6.0,
+                      )
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
                         height: 60,
                         width: 60,
                         decoration: BoxDecoration(
@@ -65,8 +71,18 @@ class HeadProductState extends State<HeadProduct> {
                           backgroundImage: NetworkImage(
                             dataProvider.mappedData[index].cImage.toString(),
                           ),
-                        ))
-                  ],
+                        ),
+                      ),
+                      Text(
+                        dataProvider.mappedData[index].cna,
+                        style: TextStyle(
+                          color: touchId == index ? Colors.white : Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
