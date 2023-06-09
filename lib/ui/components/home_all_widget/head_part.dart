@@ -17,6 +17,11 @@ class HeadProduct extends StatefulWidget {
 
 class HeadProductState extends State<HeadProduct> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     // DataProvider dataProvider =
     //     Provider.of<DataProvider>(context, listen: true);
