@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../providers/library_provider.dart';
 
-void main() {
-  runApp(const MyHomePage());
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class FormDropdown extends StatefulWidget {
+  const FormDropdown({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyDropdownPageState createState() => _MyDropdownPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyDropdownPageState extends State<FormDropdown> {
   String dropdownvalue = 'Comedy';
   var items = [
     'Fantasy',
@@ -55,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               setState(() {
                 dropdownvalue = newValue!;
               });
+              context.read<LibraryProvider>().selectedDropdownValue = newValue;
             },
           ),
         ],

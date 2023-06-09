@@ -5,6 +5,7 @@ import 'package:library_management/providers/library_provider.dart';
 import 'package:library_management/ui/components/home_all_widget/head_part.dart';
 import 'package:library_management/ui/components/home_all_widget/home_body_part.dart';
 import 'package:provider/provider.dart';
+import '../components/book_form/form_text_fields.dart';
 
 const List<Color> kDefaultRainbowColors = [
   Colors.red,
@@ -79,6 +80,27 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(height: 15),
           HomeBody(),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue.shade700,
+        onPressed: () {
+          showModalBottomSheet<void>(
+            backgroundColor: Colors.blueGrey.shade50,
+            isScrollControlled: true,
+            context: context,
+            builder: (context) => DraggableScrollableSheet(
+              initialChildSize: 0.96,
+              maxChildSize: 0.96,
+              minChildSize: 0.96,
+              expand: true,
+              builder: (context, scrollController) => SingleChildScrollView(
+                controller: scrollController,
+                child: MyCustomForm(),
+              ),
+            ),
+          );
+        },
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
