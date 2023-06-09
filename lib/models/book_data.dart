@@ -9,40 +9,52 @@ class BookData {
     book = json['book'] != null ? new Book.fromJson(json['book']) : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.book != null) {
-      data['book'] = this.book!.toJson();
-    }
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['id'] = this.id;
+  //   if (this.book != null) {
+  //     data['book'] = this.book!.toJson();
+  //   }
+  //   return data;
+  // }
 }
 
 class Book {
-  String? author;
-  String? title;
-  String? genre;
-  bool? availability;
-  String? image;
+  final String author;
+  final String title;
+  final String genre;
+  final bool availability;
+  final String image;
+  final double? rating;
 
-  Book({this.author, this.title, this.genre, this.availability, this.image});
+  Book({
+    required this.author,
+    required this.title,
+    required this.genre,
+    required this.availability,
+    required this.image,
+    this.rating,
+  });
 
-  Book.fromJson(Map<String, dynamic> json) {
-    author = json['author'];
-    title = json['title'];
-    genre = json['genre'];
-    availability = json['availability'];
-    image = json['image'];
+  factory Book.fromJson(Map<String, dynamic> json) {
+    return Book(
+      author: json['author'],
+      title: json['title'],
+      genre: json['genre'],
+      availability: json['availability'],
+      image: json['image'],
+      rating: json['rating'],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['author'] = this.author;
-    data['title'] = this.title;
-    data['genre'] = this.genre;
-    data['availability'] = this.availability;
-    data['image'] = this.image;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['author'] = this.author;
+  //   data['title'] = this.title;
+  //   data['genre'] = this.genre;
+  //   data['availability'] = this.availability;
+  //   data['image'] = this.image;
+  //   data['rating'] = this.rating;
+  //   return data;
+  // }
 }

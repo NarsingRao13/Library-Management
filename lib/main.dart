@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:library_management/providers/iterable_data_provider.dart';
 import 'package:library_management/providers/json_data_provider.dart';
 import 'package:library_management/providers/library_provider.dart';
+import 'package:library_management/ui/components/book_card.dart';
 import 'package:library_management/ui/screens/my_home_page.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(),
       routes: {
         "Home": (ctx) => const MyHomePage(),
+        "History": (ctx) => const BookCard()
       },
     );
   }

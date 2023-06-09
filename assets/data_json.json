@@ -10,6 +10,20 @@
         "bookName": "Fahrenheit 451",
         "bookAuthor": "By Ray",
         "available": true
+      },
+      {
+        "bookID": 2,
+        "bookImage": "http://img.freepik.com/free-vector/flat-world-book-day-background_23-2148094555.jpg?size=626&ext=jpg&ga=GA1.1.985226980.1677144010&semt=ais",
+        "bookName": "Digital Fortress",
+        "bookAuthor": "by Dan",
+        "available": true
+      },
+      {
+        "bookID": 3,
+        "bookImage": "https://cdn.shopify.com/s/files/1/0591/8002/4002/files/71DzJMsHMUL_750x.jpg?v=1684959429",
+        "bookName": "The Wall",
+        "bookAuthor": "JEAN-PAUL",
+        "available": true
       }
     ]
   },
@@ -20,9 +34,30 @@
     "books": [
       {
         "bookID": 1,
-        "bookImage": "",
+        "bookImage": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1408923873i/17487.jpg",
         "bookName": "Famous Five",
         "bookAuthor": "Enid Blyton",
+        "available": true
+      },
+      {
+        "bookID": 2,
+        "bookImage": "https://5.imimg.com/data5/SELLER/Default/2021/2/SA/IQ/HS/49559104/img-20210211-121925-1000x1000.jpg",
+        "bookName": "English Kids Story Book",
+        "bookAuthor": "Enid Blyton",
+        "available": true
+      },
+      {
+        "bookID": 3,
+        "bookImage": "https://chimesradio.com/wp-content/uploads/2021/11/Lion-and-mouse-1024x1024.jpeg",
+        "bookName": "Moral Story",
+        "bookAuthor": "Enid Blyton",
+        "available": true
+      },
+      {
+        "bookID": 4,
+        "bookImage": "https://m.media-amazon.com/images/I/81oND6XuHsL._AC_UF1000,1000_QL80_.jpg",
+        "bookName": " Harry Potter",
+        "bookAuthor": "By J K",
         "available": true
       }
     ]
@@ -42,7 +77,7 @@
     ]
   },
   {
-    "cna": "Self-Help Books",
+    "cna": "Self-Help",
     "cId": 4,
     "cImage": "https://images-platform.99static.com//TW0JTjwe6zcIRjSC3bQ95ugMk7M=/210x18:1137x945/fit-in/590x590/99designs-contests-attachments/90/90795/attachment_90795280",
     "books": [
@@ -57,7 +92,7 @@
     ]
   },
   {
-    "cna": "Children’s Books",
+    "cna": "Children’s",
     "cId": 5,
     "cImage": "https://t3.ftcdn.net/jpg/04/73/77/16/240_F_473771643_sMsH4HvVzxizZYftnIwz9LEd0Wiel7CX.jpg",
     "books": [
@@ -85,7 +120,7 @@
     ]
   },
   {
-    "cna": "Political Books",
+    "cna": "Political",
     "cId": 7,
     "cImage": "https://t3.ftcdn.net/jpg/06/04/45/36/360_F_604453681_PkImpnrPVYbaxjExMD8sQxaWmFJ5Sfyu.jpg",
     "books": [
