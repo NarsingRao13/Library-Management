@@ -16,11 +16,7 @@ class HeadProduct extends StatefulWidget {
 }
 
 class HeadProductState extends State<HeadProduct> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  int touchId = 0;
 
   Widget build(BuildContext context) {
     // DataProvider dataProvider =
