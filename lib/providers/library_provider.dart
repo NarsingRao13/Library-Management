@@ -84,7 +84,7 @@ class LibraryProvider extends ChangeNotifier {
     books = [];
     await booksCollection.get().then((QuerySnapshot querySnapshot) {
       final booksData = querySnapshot.docs;
-      booksData
+      final data = booksData
           .map(
             (e) => BookData(
               id: e.id,
@@ -98,6 +98,7 @@ class LibraryProvider extends ChangeNotifier {
             ),
           )
           .toList();
+      books = data;
     });
     notifyListeners();
   }

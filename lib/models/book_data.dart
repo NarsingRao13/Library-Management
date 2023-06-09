@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BookData {
   final String id;
-  final Book? book;
+  final Book book;
 
   BookData({required this.id, required this.book});
 
   factory BookData.fromJson(QueryDocumentSnapshot<Object?> json) {
     return BookData(
       id: json['id'],
-      book: json['book'] != null ? Book.fromJson(json['book']) : null,
+      book: Book.fromJson(json['book']),
     );
   }
 

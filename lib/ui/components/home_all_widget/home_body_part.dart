@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:library_management/providers/iterable_data_provider.dart';
+import 'package:library_management/providers/library_provider.dart';
 import 'package:library_management/ui/components/home_all_widget/card_wiget.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +8,7 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = context.watch<IterableData>();
+    final booksData = context.watch<LibraryProvider>().books;
 
     return Container(
       // decoration: BoxDecoration(border: Border.all(width: 2)),
@@ -23,14 +23,14 @@ class HomeBody extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: CardWidget(
-                image: data.iterableData[index].bookImage,
-                name: data.iterableData[index].bookName,
-                bookAuthor: data.iterableData[index].bookAuthor,
-                isAvailable: data.iterableData[index].available,
+                image: booksData[index].book.image,
+                name: booksData[index].book.title,
+                bookAuthor: booksData[index].book.author,
+                isAvailable: booksData[index].book.availability,
               ),
             );
           },
-          itemCount: data.iterableData.length,
+          itemCount: booksData.length,
         ),
       ),
     );
