@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import '../../models/form_model.dart';
 
 class BookBottomSheet extends StatefulWidget {
-  const BookBottomSheet({super.key, required this.onAddBook});
+  final String bookName;
+  const BookBottomSheet({
+    super.key,
+    required this.onAddBook,
+    required this.bookName,
+  });
   final void Function(FormModal formModal) onAddBook;
   @override
-  State<BookBottomSheet> createState() {
-    return BookBottomSheetState();
-  }
+  State<BookBottomSheet> createState() => BookBottomSheetState();
 }
 
 class BookBottomSheetState extends State<BookBottomSheet> {
-  final TextEditingController _textFieldController1 = TextEditingController();
+  final TextEditingController _textFieldController1 =
+      TextEditingController(text: "sd");
   final TextEditingController _textFieldController2 = TextEditingController();
   DateTime? _selectedDate;
 
@@ -23,7 +27,7 @@ class BookBottomSheetState extends State<BookBottomSheet> {
     super.dispose();
   }
 
-  void _saveBookData() async {
+  void _saveBookData(context) async {
     if (_textFieldController1.text.trim().isEmpty ||
         _textFieldController2.text.trim().isEmpty ||
         _selectedDate == null) {
@@ -45,7 +49,7 @@ class BookBottomSheetState extends State<BookBottomSheet> {
       return;
     }
 
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     widget.onAddBook(FormModal(
       bookTitle: _textFieldController1.text,
@@ -58,10 +62,11 @@ class BookBottomSheetState extends State<BookBottomSheet> {
     final now = DateTime.now();
     final firstDate = DateTime(now.year - 1, now.month, now.day);
     final pickedDate = await showDatePicker(
-        context: context,
-        initialDate: now,
-        firstDate: firstDate,
-        lastDate: now);
+      context: context,
+      initialDate: now,
+      firstDate: firstDate,
+      lastDate: now,
+    );
     setState(() {
       _selectedDate = pickedDate;
     });
@@ -73,14 +78,15 @@ class BookBottomSheetState extends State<BookBottomSheet> {
       padding: const EdgeInsets.fromLTRB(10, 40, 10, 10),
       child: Column(
         children: [
-          TextField(
-            controller: _textFieldController2,
-            maxLength: 50,
-            keyboardType: TextInputType.text,
-            decoration: const InputDecoration(
-              labelText: 'Book',
-            ),
-          ),
+          // TextField(
+          //   controller: _textFieldController2,
+          //   maxLength: 50,
+          //   keyboardType: TextInputType.text,
+          //   decoration: const InputDecoration(
+          //     labelText: 'Book Name',
+          //   ),
+          // ),
+
           Row(
             children: [
               Text(_selectedDate == null
@@ -101,14 +107,9 @@ class BookBottomSheetState extends State<BookBottomSheet> {
                   },
                   child: const Text('Cancel')),
               ElevatedButton(
-                onPressed: _saveBookData,
+                onPressed: () => _saveBookData(context),
                 child: const Text('Save'),
               ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Next...')),
             ],
           )
         ],

@@ -58,14 +58,26 @@ class _MyHomePageState extends State<MyHomePage> {
           "Library Management",
           style: TextStyle(color: Colors.white),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed("History");
+              },
+              icon: const Icon(
+                Icons.history,
+                color: Colors.white,
+              ),
+            ),
+          )
+        ],
       ),
       body: const Column(
         children: [
           HeadProduct(),
-          SizedBox(
-            height: 23,
-          ),
-          HomeBody()
+          SizedBox(height: 15),
+          HomeBody(),
         ],
       ),
     );

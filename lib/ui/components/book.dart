@@ -14,7 +14,10 @@ class _Book extends State<Book> {
   void _openAddBook() {
     showModalBottomSheet(
         context: context,
-        builder: (ctx) => BookBottomSheet(onAddBook: (FormModal formModal) {}));
+        builder: (ctx) => BookBottomSheet(
+              onAddBook: (FormModal formModal) {},
+              bookName: '',
+            ));
   }
 
   @override
