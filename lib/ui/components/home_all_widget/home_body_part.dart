@@ -26,7 +26,7 @@ class HomeBody extends StatelessWidget {
                 image: booksData[index].book.image,
                 name: booksData[index].book.title,
                 bookAuthor: booksData[index].book.author,
-                isAvailable: booksData[index].book.availability,
+                isAvailable: booksData[index].book.availability ?? true,
               ),
             );
           },
