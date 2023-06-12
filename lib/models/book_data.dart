@@ -31,8 +31,8 @@ class Book {
   final bool? availability;
   final String image;
   final double? rating;
-  final DateFormat? bookedDate;
-  final DateFormat? returnDate;
+  final Timestamp? bookedDate;
+  final Timestamp? returnDate;
 
   Book({
     required this.author,

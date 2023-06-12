@@ -2,36 +2,24 @@ import 'dart:ffi';
 
 import 'package:library_management/models/book_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class BookCard extends StatefulWidget {
-  const BookCard({super.key});
+import '../../providers/library_provider.dart';
+
+class HistoryCard extends StatefulWidget {
+  const HistoryCard({super.key});
   @override
-  State<BookCard> createState() {
-    return _BookCard();
+  State<HistoryCard> createState() {
+    return _Historycard();
   }
 }
 
-class _BookCard extends State<BookCard> {
-  List<Book> books = [
-    Book(
-      author: "Robert Kiyosaki",
-      title: "Rich Dad poor Dad",
-      genre: "Comedy",
-      availability: true,
-      image:
-          "https://cdn.shopify.com/s/files/1/0590/3830/2344/products/rich_dad_poor_dad_by_robert_t__1607410877_44fb96ac-768x1024.jpg?v=1659004008&width=1445",
-      rating: 4.5,
-    ),
-    Book(
-      author: "Robert Kiyosaki",
-      title: "Rich Dad poor Dad",
-      genre: "Comedy",
-      availability: true,
-      image:
-          "https://cdn.shopify.com/s/files/1/0590/3830/2344/products/rich_dad_poor_dad_by_robert_t__1607410877_44fb96ac-768x1024.jpg?v=1659004008&width=1445",
-      rating: 4.5,
-    ),
-  ];
+class _Historycard extends State<HistoryCard> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<LibraryProvider>().fetchHistory();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +37,9 @@ class _BookCard extends State<BookCard> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: ListView.builder(
-          itemCount: books.length,
+      body: Consumer<LibraryProvider>(
+        builder: (context, value, child) => ListView.builder(
+          itemCount: value.history.length,
           itemBuilder: (context, index) {
             return Card(
               elevation: 10,
@@ -65,7 +54,7 @@ class _BookCard extends State<BookCard> {
                     child: SizedBox(
                       width: 100,
                       child: Image.network(
-                        books[index].image,
+                        value.history[index].book.image,
                         fit: BoxFit.fitHeight,
                       ),
                     ),
@@ -78,7 +67,7 @@ class _BookCard extends State<BookCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              books[index].title,
+                              value.history[index].book.title,
                               maxLines: 2,
                               style: const TextStyle(
                                 fontSize: 20,
@@ -97,7 +86,7 @@ class _BookCard extends State<BookCard> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    books[index].title,
+                                    value.history[index].book.title,
                                     style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600),
@@ -117,7 +106,7 @@ class _BookCard extends State<BookCard> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    books[index].genre,
+                                    value.history[index].book.genre,
                                     style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600),
@@ -137,7 +126,7 @@ class _BookCard extends State<BookCard> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    books[index].rating.toString(),
+                                    value.history[index].book.rating.toString(),
                                     style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600),
@@ -151,7 +140,9 @@ class _BookCard extends State<BookCard> {
                 ],
               ),
             );
-          }),
+          },
+        ),
+      ),
     );
   }
 }
