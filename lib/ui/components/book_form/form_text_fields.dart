@@ -20,18 +20,17 @@ class MyCustomFormState extends State<MyCustomForm> {
 
   Future<void> _bookRegistration(BuildContext context) async {
     String bookName = _nameController.text;
-    String bookDescription = _descriptionController.text;
     String authorName = _authorController.text;
-    final String dropValue =
-        context.read<LibraryProvider>().selectedDropdownValue ?? "";
-    context.watch<LibraryProvider>().addBook(
-          author: authorName,
-          availability: true,
-          genre: dropValue,
-          image:
-              "http://img.freepik.com/free-vector/flat-world-book-day-background_23-2148094555.jpg?size=626&ext=jpg&ga=GA1.1.985226980.1677144010&semt=ais",
-          title: bookName,
-        );
+    final libPro = Provider.of<LibraryProvider>(context, listen: false);
+    final String dropValue = libPro.selectedDropdownValue ?? "";
+    libPro.addBook(
+      author: authorName,
+      availability: true,
+      genre: dropValue,
+      image:
+          "http://img.freepik.com/free-vector/flat-world-book-day-background_23-2148094555.jpg?size=626&ext=jpg&ga=GA1.1.985226980.1677144010&semt=ais",
+      title: bookName,
+    );
   }
 
   @override
@@ -147,7 +146,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               ),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  _bookRegistration;
+                  _bookRegistration(context);
                   _nameController.clear();
                   _authorController.clear();
                   _descriptionController.clear();

@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:library_management/models/book_data.dart';
 import 'package:library_management/models/form_model.dart';
 import 'package:library_management/ui/components/book_bottomsheet.dart';
 
 class CardWidget extends StatelessWidget {
-  final String image;
-  final String name;
-  final String bookAuthor;
-  final bool isAvailable;
+  final BookData data;
   const CardWidget({
     super.key,
-    required this.image,
-    required this.name,
-    required this.bookAuthor,
-    required this.isAvailable,
+    required this.data,
   });
 
   @override
   Widget build(BuildContext context) {
+    final availabilityStatus = data.book.availability ?? false;
     return SingleChildScrollView(
       child: Stack(
         children: [
@@ -39,7 +35,7 @@ class CardWidget extends StatelessWidget {
                       topRight: Radius.circular(12),
                     ),
                     child: Image.network(
-                      image,
+                      data.book.image,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -48,7 +44,7 @@ class CardWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8.0, top: 8),
                   height: 30,
                   child: Text(
-                    name,
+                    data.book.title,
                     maxLines: 2,
                   ),
                 ),
@@ -61,22 +57,32 @@ class CardWidget extends StatelessWidget {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8.0),
-                          child: Text(bookAuthor),
+                          child: Text(data.book.author),
                         ),
                       ),
                       Flexible(
                         flex: 1,
                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: availabilityStatus
+                                ? Colors.white
+                                : const Color(0x00ffff00),
+                          ),
                           onPressed: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (ctx) => BookBottomSheet(
-                                bookName: name,
-                                onAddBook: (FormModal formModal) {},
-                              ),
-                            );
+                            if (availabilityStatus) {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (ctx) => BookBottomSheet(
+                                  data: data,
+                                  bookName: data.book.title,
+                                  onAddBook: (FormModal formModal) {},
+                                ),
+                              );
+                            }
                           },
-                          child: const Text("Book"),
+                          child: const Text(
+                            "Book",
+                          ),
                         ),
                       )
                     ],
@@ -92,14 +98,17 @@ class CardWidget extends StatelessWidget {
               height: 26,
               width: 83,
               decoration: BoxDecoration(
-                color: isAvailable ? Colors.green : Colors.red,
+                color:
+                    data.book.availability ?? true ? Colors.green : Colors.red,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    isAvailable ? "Available" : "UnAvailbale",
+                    data.book.availability ?? true
+                        ? "Available"
+                        : "UnAvailbale",
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 13,

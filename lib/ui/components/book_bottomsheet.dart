@@ -1,12 +1,20 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:library_management/models/book_data.dart';
+import 'package:library_management/providers/library_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/form_model.dart';
 
 class BookBottomSheet extends StatefulWidget {
   final String bookName;
+  final BookData data;
   const BookBottomSheet({
     super.key,
     required this.onAddBook,
+    required this.data,
     required this.bookName,
   });
   final void Function(FormModal formModal) onAddBook;
@@ -17,8 +25,11 @@ class BookBottomSheet extends StatefulWidget {
 class BookBottomSheetState extends State<BookBottomSheet> {
   final TextEditingController _textFieldController1 =
       TextEditingController(text: "sd");
-  final TextEditingController _textFieldController2 = TextEditingController();
+  String text = "";
+  final TextEditingController _textFieldController2 =
+      TextEditingController(text: "text");
   DateTime? _selectedDate;
+  bool showSaveButton = false;
 
   @override
   void dispose() {
@@ -27,49 +38,70 @@ class BookBottomSheetState extends State<BookBottomSheet> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    setState(() {
+      text = widget.data.book.title;
+    });
+    super.initState();
+  }
+
   void _saveBookData(context) async {
-    if (_textFieldController1.text.trim().isEmpty ||
-        _textFieldController2.text.trim().isEmpty ||
-        _selectedDate == null) {
-      showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('please enter all the fields'),
-          content: const Text('please enter a valid content'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(ctx);
-              },
-              child: const Text('Okay'),
-            ),
-          ],
-        ),
-      );
-      return;
-    }
-
-    await Future.delayed(const Duration(seconds: 2));
-
-    widget.onAddBook(FormModal(
-      bookTitle: _textFieldController1.text,
-      date: _selectedDate!,
-    ));
+    toggleBook();
     Navigator.pop(context);
   }
 
   void _presentDatePicker() async {
     final now = DateTime.now();
     final firstDate = DateTime(now.year - 1, now.month, now.day);
+    final lastDate = DateTime(now.year + 1, now.month, now.day);
     final pickedDate = await showDatePicker(
       context: context,
       initialDate: now,
       firstDate: firstDate,
-      lastDate: now,
+      lastDate: lastDate,
     );
+    print("pickedDate $pickedDate");
     setState(() {
+      showSaveButton = true;
       _selectedDate = pickedDate;
     });
+  }
+
+  void toggleBook() {
+    log("Hey");
+    print("Pressed");
+    if (_selectedDate == null) {
+      return;
+    }
+
+    Timestamp returnDateTimestamp = Timestamp.fromDate(_selectedDate!);
+    Timestamp bookedDateTimestamp = Timestamp.fromDate(DateTime.now());
+
+    Provider.of<LibraryProvider>(context, listen: false).reserveBook(
+      BookData(
+        id: widget.data.id,
+        book: Book(
+            author: widget.data.book.author,
+            title: widget.data.book.title,
+            genre: widget.data.book.genre,
+            image: widget.data.book.image,
+            bookedDate: bookedDateTimestamp,
+            returnDate: returnDateTimestamp),
+      ),
+    );
+
+    Provider.of<LibraryProvider>(context, listen: false).updateBook(
+      BookData(
+        id: widget.data.id,
+        book: Book(
+            author: widget.data.book.author,
+            title: widget.data.book.title,
+            genre: widget.data.book.genre,
+            image: widget.data.book.image,
+            availability: false),
+      ),
+    );
   }
 
   @override
@@ -77,40 +109,53 @@ class BookBottomSheetState extends State<BookBottomSheet> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 40, 10, 10),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TextField(
-          //   controller: _textFieldController2,
-          //   maxLength: 50,
-          //   keyboardType: TextInputType.text,
-          //   decoration: const InputDecoration(
-          //     labelText: 'Book Name',
-          //   ),
-          // ),
-
+          Text(
+            text,
+            style: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           Row(
             children: [
-              Text(_selectedDate == null
-                  ? 'No date selected'
-                  : formatter.format(_selectedDate!)),
+              Text(
+                _selectedDate == null
+                    ? 'When do you want to return the book?'
+                    : formatter.format(_selectedDate!),
+                style: const TextStyle(fontSize: 15),
+              ),
               IconButton(
                 onPressed: _presentDatePicker,
                 icon: const Icon(Icons.calendar_month),
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel')),
-              ElevatedButton(
-                onPressed: () => _saveBookData(context),
-                child: const Text('Save'),
-              ),
-            ],
+          if (!showSaveButton)
+            const Text(
+              "*Please select the return date",
+              textAlign: TextAlign.left,
+              style: TextStyle(color: Colors.red),
+            ),
+          Container(
+            margin: const EdgeInsets.only(top: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel')),
+                ElevatedButton(
+                  onPressed: () =>
+                      showSaveButton ? _saveBookData(context) : null,
+                  child: const Text('Save'),
+                ),
+              ],
+            ),
           )
         ],
       ),

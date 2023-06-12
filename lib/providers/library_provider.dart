@@ -119,13 +119,12 @@ class LibraryProvider extends ChangeNotifier {
       "image": oldBookData.book.image
     };
 
-    await booksCollection
-        .doc(oldBookData.id)
-        .update(newBook)
-        .then(
-          (_) => print("Success"),
-        )
-        .onError((error, stackTrace) => log('error: $error'));
+    await booksCollection.doc(oldBookData.id).update(newBook).then(
+          (_) => {
+            print("Success"),
+            fetchBooks(),
+          },
+        );
     notifyListeners();
   }
 
@@ -189,7 +188,7 @@ class LibraryProvider extends ChangeNotifier {
         .add(newBook)
         .then(
           (DocumentReference doc) => {
-            fetchHistoryWithId(id: doc.id),
+            fetchHistory(),
           },
         )
         .onError(
