@@ -98,8 +98,9 @@ class CardWidget extends StatelessWidget {
               height: 26,
               width: 83,
               decoration: BoxDecoration(
-                color:
-                    data.book.availability ?? true ? Colors.green : Colors.red,
+                color: data.book.availability ?? true
+                    ? Colors.green.withOpacity(0.6)
+                    : Colors.red,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(

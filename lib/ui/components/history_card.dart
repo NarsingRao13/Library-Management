@@ -50,9 +50,10 @@ class _Historycard extends State<HistoryCard> {
                     borderRadius: BorderRadius.circular(20),
                     child: SizedBox(
                       width: 100,
+                      height: 120,
                       child: Image.network(
                         value.history[index].book.image,
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),

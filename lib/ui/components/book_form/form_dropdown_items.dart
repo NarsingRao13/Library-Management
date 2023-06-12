@@ -1,25 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:library_management/models/category_data.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/library_provider.dart';
 
-class FormDropdown extends StatefulWidget {
+class FormDropdown extends StatelessWidget {
   const FormDropdown({Key? key}) : super(key: key);
 
   @override
-  _MyDropdownPageState createState() => _MyDropdownPageState();
-}
-
-class _MyDropdownPageState extends State<FormDropdown> {
-  String dropdownvalue = 'Comedy';
-  var items = [
-    'Fantasy',
-    'Adventure',
-    'Comedy',
-    'Horror',
-    'Devotional',
-  ];
-  @override
   Widget build(BuildContext context) {
+    final List<CategoryData> catDropdownData =
+        context.read<LibraryProvider>().categories;
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -38,21 +28,18 @@ class _MyDropdownPageState extends State<FormDropdown> {
               fillColor: Colors.white,
             ),
             dropdownColor: Colors.white,
-            value: dropdownvalue,
+            value: catDropdownData[0].name,
             icon: const Icon(Icons.keyboard_arrow_down),
-            items: items.map((String items) {
+            items: catDropdownData.map((CategoryData items) {
               return DropdownMenuItem(
-                value: items,
+                value: items.name,
                 child: Text(
-                  items,
+                  items.name,
                   style: const TextStyle(color: Colors.blue),
                 ),
               );
             }).toList(),
             onChanged: (String? newValue) {
-              setState(() {
-                dropdownvalue = newValue!;
-              });
               context.read<LibraryProvider>().selectedDropdownValue = newValue;
             },
           ),

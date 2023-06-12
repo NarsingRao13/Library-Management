@@ -26,7 +26,6 @@ class HeadProductState extends State<HeadProduct> {
 
     // final dataProvider = context.watch<DataProvider>();
     // final iterableProvider = Provider.of<IterableData>(context, listen: false);
-    final iterableProvider = context.read<IterableData>();
 
     return SizedBox(
       height: 140,
@@ -39,9 +38,12 @@ class HeadProductState extends State<HeadProduct> {
               padding: const EdgeInsets.all(10),
               child: InkWell(
                 onTap: () {
-                  updateProvider.updateSelectedCatName(
-                    dataProvider.categories[index].name,
-                  );
+                  if (dataProvider.selectedCatName !=
+                      dataProvider.categories[index].name) {
+                    updateProvider.updateSelectedCatName(
+                      dataProvider.categories[index].name,
+                    );
+                  }
 
                   // iterableProvider.setData(dataProvider.categories[index].id);
                 },
